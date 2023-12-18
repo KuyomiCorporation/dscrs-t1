@@ -225,7 +225,7 @@ jobs:
         run: DISCOURSE_DEV_DB=discourse_test QUNIT_PARALLEL=3 bin/rake themes:qunit_all_official
         timeout-minutes: 15
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: always() && matrix.build_type == 'frontend' && matrix.target == 'plugins'
         with:
           name: ember-exam-execution-plugins-frontend
@@ -264,7 +264,7 @@ jobs:
         timeout-minutes: 30
 
       - name: Upload failed system test screenshots
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: matrix.build_type == 'system' && failure()
         with:
           name: failed-system-test-screenshots
@@ -342,7 +342,7 @@ jobs:
         run: yarn ember exam --path /tmp/emberbuild --load-balance --parallel=5 --launch "${{ env.TESTEM_BROWSER }}" --write-execution-file --random
         timeout-minutes: 15
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: ${{ always() }}
         with:
           name: ember-exam-execution-${{ matrix.browser }}
